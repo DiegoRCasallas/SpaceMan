@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5781912436319387702}
   - component: {fileID: 1043175775555465314}
   - component: {fileID: 9193530169190416270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: obstacle-big-rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

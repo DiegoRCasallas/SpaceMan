@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3861535916148172404}
   - component: {fileID: 3855606400637635057}
   - component: {fileID: 7880524451270261733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: obstacle-mini-rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
