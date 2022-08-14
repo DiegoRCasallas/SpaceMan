@@ -20,13 +20,13 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
 
     void Awake()
-    {   
+    {
         /*si la instacia no ha sido inicializada se asigna a this*/
-        if (sharedInstance== null)
+        if (sharedInstance == null)
         {
-            sharedInstance=this;
+            sharedInstance = this;
         }
-        
+
 
     }
 
@@ -43,23 +43,43 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        /*cond permite inicializar el juego, camciamos a estado inGame*/
+        if (Input.GetButtonDown("Start"))
+        {
+            StartGame();
+        }
+        else if (Input.GetButtonDown("Pause"))
+        {
+            BackToMenu();
+        }
 
+            
     }
+
+
+
+
     /*inicia el juego*/
     public void StartGame()
     {
-
+        SetGameState(GameState.inGame);
     }
     /*finaliza el modo juego*/
     public void GameOver()
     {
-
+        SetGameState(GameState.gameOver);
     }
     /*Regresa al menu*/
     public void BackToMenu()
     {
-
+        SetGameState(GameState.menu);
     }
+
+
+
+
+
+
 
     /*unico Metodo para cambiar el estado  del juego(singleton)*/
     private void SetGameState(GameState newGameState)

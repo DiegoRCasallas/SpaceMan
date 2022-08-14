@@ -37,10 +37,20 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         /*Si se pulsa tecla espacio o mouse click der*/
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        // if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        // {
+        //     Jump();
+        // }
+
+        /*Con input manager reeplazamos el scrip anterior y será mas eficiente*/
+        if (GameManager.sharedInstance.currenGameState == GameState.inGame)
         {
-            Jump();
+            if (Input.GetButtonDown("Jump") || Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
         }
+
 
         animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
 
@@ -66,23 +76,26 @@ public class PlayerController : MonoBehaviour
         //       rigidBody.velocity.y);
         //  }
 
-        //qu camine con uso de teclas
-        if (Input.GetKey(KeyCode.D))
+        /*Esto funciona mientras el estado sea inGame*/
+        if (GameManager.sharedInstance.currenGameState == GameState.inGame)
         {
-            RunRight();
-            /*animacion*/
-            animator.SetBool(STATE_RUNNING, true);
+            //que camine con uso de teclas
+            if (Input.GetKey(KeyCode.D))
+            {
+                RunRight();
+                /*animacion*/
+                animator.SetBool(STATE_RUNNING, true);
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                RunLeft();
+                animator.SetBool(STATE_RUNNING, true);
+            }
+            else
+            {
+                animator.SetBool(STATE_RUNNING, false);
+            }
         }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            RunLeft();
-            animator.SetBool(STATE_RUNNING, true);
-        }
-        else
-        {
-            animator.SetBool(STATE_RUNNING, false);
-        }
-
         // if(Input.GetKey(KeyCode.A))
         // {
         //  RunLeft();
@@ -111,11 +124,11 @@ public class PlayerController : MonoBehaviour
     }
     void RunRight()
     {
-        rigidBody.AddForce(Vector2.right*runningSpeed, ForceMode2D.Force);
+        rigidBody.AddForce(Vector2.right * runningSpeed, ForceMode2D.Force);
     }
     void RunLeft()
     {
-        rigidBody.AddForce(Vector2.left*runningSpeed, ForceMode2D.Force);
+        rigidBody.AddForce(Vector2.left * runningSpeed, ForceMode2D.Force);
     }
 
     //Metodo que me dice si el personaje está tocando el suelo(Ground)
@@ -125,13 +138,13 @@ public class PlayerController : MonoBehaviour
         if (Physics2D.Raycast(
             /*Posicion personaje*/this.transform.position,
             /*hacia donde disparamos el rayo(abajo)*/Vector2.down,
-               /*Distancia maxima del rayo desde
-                el centro del personaje (2mts)*/2f,
+                /*Distancia maxima del rayo desde
+                 el centro del personaje (2mts)*/2f,
             /*contra que debe chocar el rayo(Ground)*/groundMask))
         {
             /*para que contifue la animacion*/
             //animator.enabled=true;
-            GameManager.sharedInstance.currenGameState=GameState.inGame;
+
             return true;
         }
         else
