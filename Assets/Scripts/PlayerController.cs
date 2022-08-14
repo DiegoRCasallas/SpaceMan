@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             /*para que contifue la animacion*/
             //animator.enabled=true;
+            GameManager.sharedInstance.currenGameState=GameState.inGame;
             return true;
         }
         else
