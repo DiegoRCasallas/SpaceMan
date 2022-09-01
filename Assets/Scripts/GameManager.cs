@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     //utilizando el patron singleton que me permitira evitar la creacion de 1 objeto por esta clase (GameManager)
     public static GameManager sharedInstance;
+    /* A reference to the player controller. */
+    private PlayerController controller;
 
     void Awake()
     {
@@ -38,7 +40,8 @@ public class GameManager : MonoBehaviour
     /*Crearemos 3 metodos diferentes (iniciar partida, finalizar partida(muere), irmenuprincipal*/
     void Start()
     {
-
+        controller=GameObject.Find("Player").
+                        GetComponent<PlayerController>();
     }
 
     void Update()
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SetGameState(GameState.inGame);
+        controller.StartGame();
     }
     /*finaliza el modo juego*/
     public void GameOver()
@@ -80,7 +84,6 @@ public class GameManager : MonoBehaviour
 
 
 
-
     /*unico Metodo para cambiar el estado  del juego(singleton)*/
     private void SetGameState(GameState newGameState)
     {
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
         else if (newGameState == GameState.inGame)
         {
             //TODO: hay que preparar la escenapara jugar
+            controller.StartGame();
 
         }
         else if (newGameState == GameState.gameOver)

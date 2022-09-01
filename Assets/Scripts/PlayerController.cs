@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     //var para cargar las animaciones correspondientes
     Animator animator;
+    
+    //Variable  tipo Vector3
+    Vector3 startPosition;
+
+
     /*traemos las variables creada en unity y las tipamos con const*/
     /*variables en  MAYUCULAS convesion para constantes de mundo C++*/
     private string STATE_ALIVE = "isAlive";
@@ -31,7 +36,23 @@ public class PlayerController : MonoBehaviour
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUND, true);
         animator.SetBool(STATE_RUNNING, false);
+        
+       /* Saving the initial position of the player. */
+        startPosition=this.transform.position;
     }
+
+    
+    /* This function sets the position of the player to the start position and sets the velocity of the
+    player to zero.*/
+    public void StartGame(){
+        this.transform.position=startPosition;
+        this.rigidBody.velocity=Vector2.zero;
+    }
+
+
+
+
+
     // Update is called once per frame. 
     /*Se ejecuta hasta 60xseg*/
     void Update()
@@ -153,6 +174,13 @@ public class PlayerController : MonoBehaviour
             //animator.enabled=false;
             return false;
         }
+    }
+
+    /*METODO MORIR*/
+    public void Die()
+    {
+        this.animator.SetBool(STATE_ALIVE,false);
+        GameManager.sharedInstance.GameOver();
     }
 
 }
