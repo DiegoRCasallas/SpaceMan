@@ -33,8 +33,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator.SetBool(STATE_ALIVE, true);
-        animator.SetBool(STATE_ON_THE_GROUND, true);
+       
         animator.SetBool(STATE_RUNNING, false);
         
        /* Saving the initial position of the player. */
@@ -45,10 +44,22 @@ public class PlayerController : MonoBehaviour
     /* This function sets the position of the player to the start position and sets the velocity of the
     player to zero.*/
     public void StartGame(){
-        this.transform.position=startPosition;
-        this.rigidBody.velocity=Vector2.zero;
+        animator.SetBool(STATE_ALIVE, true);
+        animator.SetBool(STATE_ON_THE_GROUND, true);
+        RestartPosition();
     }
 
+    /*Metodo que me invoca  la posicion origina de mi personaje*/
+    void RestartPosition(){
+
+        this.transform.position=startPosition;
+        this.rigidBody.velocity=Vector2.zero;
+        animator.SetBool(STATE_ALIVE,true);
+    }
+
+    void PauseGame(){
+        
+    }
 
 
 

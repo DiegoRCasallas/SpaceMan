@@ -46,8 +46,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        /*cond permite inicializar el juego, camciamos a estado inGame*/
-        if (Input.GetButtonDown("Start"))
+        /*cond permite inicializar el juego, cambiamos a estado inGame*/
+        if (Input.GetButtonDown("Start") 
+        && currenGameState!=GameState.inGame)
         {
             StartGame();
         }
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         if (newGameState == GameState.menu)
         {
-            //TODO: colocal la logica dle menu
+            //TODO: colocal la logica del menu
 
         }
         else if (newGameState == GameState.inGame)
