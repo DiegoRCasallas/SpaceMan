@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
         {
             //TODO: hay que preparar la escenapara jugar
             controller.StartGame();
+           
 
         }
         else if (newGameState == GameState.gameOver)
